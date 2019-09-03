@@ -1,0 +1,8 @@
+{
+    "configurations": [
+        {
+            "includePath": [ "${workspaceFolder}/libft", "${workspaceFolder}/**" ]
+        }
+    ],
+    "version": 4
+}
