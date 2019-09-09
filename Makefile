@@ -12,7 +12,7 @@
 
 NAME = ft_ls
 
-SRC = main.c
+SRC = main.c nodes.c
 
 #-Wall -Werror -Wextra
 FLAGS = -I libft/ -I ./
