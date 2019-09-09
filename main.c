@@ -52,17 +52,29 @@ void proccess_flag(char *s, t_flags *f)
 	}
 }
 
+void print_rec(t_ls **list, char *path)
+{
+	t_ls *l_ls;
+
+	// l_ls =
+}
+
 void handle_dir(char *path, t_flags *f)
 {
 	struct dirent *pd;
 	DIR *d;
 	t_ls *l_ls;
+	char tmp[255];
 	struct stat st;
 
-	lstat("libft", &st);
-	printf("********** %ld\n", st.st_atimespec.tv_sec);
 	l_ls = NULL;
-	if ((d = opendir(path)) == NULL)
+	printf("%d\n", lstat("./libft", &st));
+	printf("%d\n", st.st_mode);
+
+	ft_strclr(tmp);
+	ft_strcat(tmp, path);
+	ft_strcat(tmp, "/");
+	if ((d = opendir(tmp)) == NULL)
 	{
 		ft_putendl_fd("No such file of directory!", 2);
 		return;
@@ -79,12 +91,25 @@ void handle_dir(char *path, t_flags *f)
 	if (f->r)
 		sort_by_ascii_r(&l_ls);
 	if (f->t)
-		sort_by_time(&l_ls);
-	while (l_ls)
+		sort_by_time(&l_ls, tmp);
+	// if (f->R)
+	// {
+	// print_rec(&l_ls, path);
+	while (l_ls != NULL)
 	{
-		printf("---> %s\n", l_ls->name);
+		printf("\t%s\n", l_ls->name);
+		// ft_strclr(tmp);
+		// ft_strcat(tmp, path);
+		// ft_strcat(tmp, "/");
+		// ft_strcat(tmp, l_ls->name);
+		// lstat(tmp, &st);
+		// if ((st.st_mode & S_IFMT) == S_IFDIR)
+		// {
+		// 	handle_dir(tmp, &(*f));
+		// }
 		l_ls = l_ls->next;
 	}
+	// }
 }
 
 void proccess(t_flags *f, char **av, int ac)
